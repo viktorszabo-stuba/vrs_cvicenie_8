@@ -30,3 +30,29 @@ SPI1->CR2 |= 1 << 12;
 - CS - pripojiť k PB5 pinu (D11)
 - GND -  kam asi?  ¯\ _(ツ) _/¯
 - Vcc - pripojiť na 3v3
+
+# Displej
+
+- na cvičení sa bude používať displej ILI9163
+
+- knižnica pre tento displej sa nachádza v projekte v priečinku "display"
+
+- vďaka knižnici už nie je potrebné konfigurovať samotný displej, stačí už len využívať funkcie, ktoré poskytuje a vykreslovať text, geometrické útvary, obrázky ... 
+
+<p align="center">
+    <img src="https://github.com/VRS-Predmet/vrs_cvicenie_8/blob/master/images/displej.jpg" width="500">
+</p>
+
+### Pripojenie displeju
+
+- pin LED - pripojiť k napájaniu 3v3
+- SCK - pripojiť k PA5 pinu (A4)
+- SDA - pripojiť k PA7 pinu (A6)
+- A0 - pripojiť k PB6 pinu (D5)
+- RESET - pripojiť k PA3 (A2)
+- CS - pripojiť k PB5 pinu (D11)
+- GND -  kam asi?  ¯\ _(ツ) _/¯
+- Vcc - pripojiť na 3v3
+
+# Zadanie
+- z PC si cez USART pošlite dáta do MCU a tie následne vykreslite/vypíšte na displej
