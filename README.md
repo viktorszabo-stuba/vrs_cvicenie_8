@@ -20,3 +20,13 @@
 ```php
 SPI1->CR2 |= 1 << 12;
 ```
+### Pripojenie displeju
+
+- pin LED - pripojiť k napájaniu 3v3
+- SCK - pripojiť k PA5 pinu (A4)
+- SDA - pripojiť k PA7 pinu (A6)
+- A0 - pripojiť k PB6 pinu (D5)
+- RESET - pripojiť k PA3 (A2)
+- CS - pripojiť k PB5 pinu (D11)
+- GND -  kam asi?  ¯\ _(ツ) _/¯
+- Vcc - pripojiť na 3v3
