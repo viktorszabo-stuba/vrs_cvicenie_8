@@ -16,7 +16,7 @@
 - Clock polarity - polarita "Low" - pri každom tiku hodím sa úroveň signálu zmení z "Low" na "High" a ak nie je pripojený zdroj hodin, tak je na vodiči úroveň "Low"
 - Clock phase - kedy začne vzorkovanie dát a ich posúvanie
 
-- ak cheme využívať 8 bitový prenos, je potrebné doplniť do vygenerovaného kódu nastavenie "FRXTH" v "CR2" registri :
+- pre 8 bitový prenos, je potrebné doplniť do vygenerovaného kódu nastavenie "FRXTH" v "CR2" registri :
 ```php
 SPI1->CR2 |= 1 << 12;
 ```
