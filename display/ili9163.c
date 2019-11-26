@@ -200,14 +200,14 @@ void lcdPlot(uint8_t x, uint8_t y, uint16_t colour)
 	lcdWriteParameter(0x00);
 	lcdWriteParameter(x);
 	lcdWriteParameter(0x00);
-	lcdWriteParameter(0x1f);
+	lcdWriteParameter(0x7f);
 
 	// Vertical Address end Position
 	lcdWriteCommand(SET_PAGE_ADDRESS);
 	lcdWriteParameter(0x00);
 	lcdWriteParameter(y);
 	lcdWriteParameter(0x00);
-	lcdWriteParameter(0x1f);//7f
+	lcdWriteParameter(0x7f);//7f
 
 	// Plot the point
 	lcdWriteCommand(WRITE_MEMORY_START);
