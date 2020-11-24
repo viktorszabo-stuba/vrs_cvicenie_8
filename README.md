@@ -44,6 +44,7 @@
 4. Vytvorte aplikáciu, ktorá na displeji zobrazí vaše meno, priezvysko a ID. Kedže sa všetky znaky na displaj nezmestia naraz v jednom čase, je potrebné, aby sa text posúval. Výsledná animácia bude vyzerať tak, že na začiatku sa zobrazia prvé štyri znaky krstného mena. Potom sa zobrazí 2. až 5. znak krstného mena a tak ďalej ... . Krstné meno, priezvysko a ID budú navzájom oddelené podčiarkovníkom - "_". Do vašej sady znakov teda zahrnte aj tento znak.
 5. Znak sa posunie každých 500ms.
 6. Reťazec s menom, priezvyskom a ID môže byť napevno definovaný.
+7. Ak sa zobrazovaný text dostane na koniec, začne sa text po znakoch posúvať opačným smerom až kým nedojde na začiatok. 
 
 Príklad: 
 - meno, priezvysko a ID budú vo výsledku tvoriť pre zobrazenie reťazec: Janko_Bukvička_123
