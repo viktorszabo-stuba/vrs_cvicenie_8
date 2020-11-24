@@ -29,7 +29,7 @@ void SystemClock_Config(void);
 extern uint64_t disp_time;
 
 uint64_t saved_time;
-double num_to_display = 100;
+double num_to_display = 10;
 
 int main(void)
 {

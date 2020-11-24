@@ -13,6 +13,7 @@ uint64_t disp_time = 0, disp_time_saved = 0;
 void updateDisplay(void);
 void setDigit(uint8_t pos);
 
+/*Reset (turn-off) all the segments of display*/
 void resetSegments(void)
 {
 	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_11);
@@ -25,6 +26,7 @@ void resetSegments(void)
 	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_3);
 }
 
+/*Set (turn-on) all the segments of display*/
 void setSegments(void)
 {
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_11);
@@ -37,6 +39,7 @@ void setSegments(void)
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_3);
 }
 
+/* Reset (turn-off) all digits*/
 void resetDigits(void)
 {
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_2);
@@ -46,6 +49,7 @@ void resetDigits(void)
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_7);
 }
 
+/* Reset (turn-on) all digits*/
 void setDigits(void)
 {
 	DIGIT_1_ON;
@@ -60,6 +64,7 @@ void setDecimalPoint(void)
 	LL_GPIO_ResetOutputPin(SEGMENTDP_PORT, SEGMENTDP_PIN);
 }
 
+/* Functions to display numbers 0 - 9 */
 void setOne(void)
 {
 	// B,C
@@ -158,7 +163,9 @@ void setZero(void)
 	LL_GPIO_ResetOutputPin(SEGMENTB_PORT, SEGMENTB_PIN);
 }
 
-
+/**
+ * Pre-process number before it is displayed. Extract digits of the number
+ */
 void displayNumber(double num)
 {
 	uint8_t i = 0;
@@ -176,8 +183,6 @@ void displayNumber(double num)
 		dDisplayData.digit_num = 4;
 		dDisplayData.resolution = 0;
 
-		//memset(dDisplayData.digit, 0, sizeof(uint8_t)*4);
-
 	    while(num > 1)
 	    {
 	    	dDisplayData.digit[i] = (uint32_t)num % 10;
@@ -191,7 +196,6 @@ void displayNumber(double num)
 		dDisplayData.resolution = 1;
 
 		num = num * 10;
-		//memset(dDisplayData.digit, 0, sizeof(uint8_t)*4);
 
 	    while(num > 1)
 	    {
@@ -206,7 +210,20 @@ void displayNumber(double num)
 		dDisplayData.resolution = 2;
 
 		num = num * 100;
-		//memset(dDisplayData.digit, 0, sizeof(uint8_t)*4);
+
+	    while(num > 1)
+	    {
+	    	dDisplayData.digit[i] = (uint32_t)num % 10;
+	        num = num / 10;
+	        i++;
+	    }
+	}
+	else if(num >= 1)
+	{
+		dDisplayData.digit_num = 1;
+		dDisplayData.resolution = 3;
+
+		num = num * 1000;
 
 	    while(num > 1)
 	    {
@@ -221,7 +238,7 @@ void displayNumber(double num)
 		dDisplayData.resolution = 3;
 
 		num = num * 1000;
-		//memset(dDisplayData.digit, 0, sizeof(uint8_t)*4);
+		dDisplayData.digit[3] = 0;
 
 	    while(num > 1)
 	    {
@@ -232,6 +249,9 @@ void displayNumber(double num)
 	}
 }
 
+/*
+ * Turns required digit ON
+ */
 void setDigit(uint8_t pos)
 {
 	switch(pos)
@@ -251,11 +271,12 @@ void setDigit(uint8_t pos)
 	}
 }
 
-
+/**
+ * Display data in dDisplayData.
+ * Sets every digit to display its value and decimal point.
+ */
 void updateDisplay(void)
 {
-	uint8_t delay = 1;
-
 	for(uint8_t i = 0; i < 4; i++)
 	{
 		switch(dDisplayData.digit[i])
@@ -308,15 +329,14 @@ void updateDisplay(void)
 		}
 
 		disp_time_saved = disp_time;
-
-		while((disp_time_saved + 3) > disp_time){};
+		while((disp_time_saved + 2) > disp_time){};
 
 		resetDigits();
 		resetSegments();
 	}
 }
 
-
+//Update displayed data and keep display ON
 void TIM3_IRQHandler(void)
 {
 	if(LL_TIM_IsActiveFlag_UPDATE(TIM3))
