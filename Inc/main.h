@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -36,7 +36,7 @@ extern "C" {
 #include "stm32f3xx_ll_utils.h"
 #include "stm32f3xx_ll_pwr.h"
 #include "stm32f3xx_ll_dma.h"
-#include "stm32f3xx_ll_spi.h"
+#include "stm32f3xx_ll_tim.h"
 #include "stm32f3xx.h"
 #include "stm32f3xx_ll_gpio.h"
 

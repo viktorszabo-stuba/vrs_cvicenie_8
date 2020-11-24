@@ -1,8 +1,8 @@
 /**
   ******************************************************************************
-  * File Name          : SPI.h
+  * File Name          : TIM.h
   * Description        : This file provides code for the configuration
-  *                      of the SPI instances.
+  *                      of the TIM instances.
   ******************************************************************************
   * @attention
   *
@@ -17,8 +17,8 @@
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __spi_H
-#define __spi_H
+#ifndef __tim_H
+#define __tim_H
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -34,23 +34,8 @@
 
 /* USER CODE END Private defines */
 
-void MX_SPI1_Init(void);
+void MX_TIM3_Init(void);
 
-unsigned char readWriteSPI1(unsigned char txData);
-void initCS_Pin(void);
-void cs_set(void);
-void cs_reset(void);
-
-void initCD_Pin(void);
-void cd_set(void);
-void cd_reset(void);
-
-void initRES_Pin(void);
-void res_set(void);
-void res_reset(void);
-
-void device_Unselect(void);
-void device_Select(void);
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */
@@ -58,7 +43,7 @@ void device_Select(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /*__ spi_H */
+#endif /*__ tim_H */
 
 /**
   * @}

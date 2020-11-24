@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
@@ -20,109 +20,54 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "spi.h"
 #include "gpio.h"
-#include "ili9163.h"
+#include "tim.h"
+#include "display.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
+extern uint64_t disp_time;
 
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-uint8_t rx_data = 0;
-/* USER CODE END 0 */
+uint64_t saved_time;
+double num_to_display = 100;
 
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-  
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  
 
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
   LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
   NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
-  /* System interrupt init*/
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
   SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SPI1_Init();
 
-  initCD_Pin();
-  initCS_Pin();
-  initRES_Pin();
+  setSegments();
+  setDigits();
 
-  LL_mDelay(50);
+  LL_mDelay(2000);
 
-  lcdInitialise(LCD_ORIENTATION3);
-  lcdClearDisplay(decodeRgbValue(0, 0, 0));
+  resetDigits();
+  resetSegments();
 
-  lcdPutS("VRS 2019", lcdTextX(2), lcdTextY(1), decodeRgbValue(0, 0, 0), decodeRgbValue(31, 31, 31));
-  lcdPutS("Cvicenie 8", lcdTextX(2), lcdTextY(4), decodeRgbValue(255, 255, 255), decodeRgbValue(0, 0, 0));
-  lcdPutS("SPI komunikacia", lcdTextX(2), lcdTextY(5), decodeRgbValue(255, 255, 255), decodeRgbValue(0, 0, 0));
-
-  uint8_t state = 0;
+  MX_TIM3_Init();
 
   while (1)
   {
+	  if(disp_time > (saved_time + 100))
+	  {
+		  displayNumber(num_to_display);
+	  	  num_to_display -= 0.10;
+	  	  saved_time = disp_time;
 
-		state ? lcdFilledRectangle(10, 75, 34, 99, decodeRgbValue(31, 0, 0)) : lcdFilledRectangle(10, 75, 34, 99, decodeRgbValue(0, 31, 0));
-		state ^= 1;
-
-		LL_mDelay(100);
+	  	  if(num_to_display <= 0)
+	  	  {
+	  		  num_to_display = 100;
+	  	  }
+	  }
   }
-  /* USER CODE END 3 */
+
 }
 
 /**
@@ -157,6 +102,7 @@ void SystemClock_Config(void)
   }
   LL_Init1msTick(8000000);
   LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);
+  LL_SYSTICK_EnableIT();
   LL_SetSystemCoreClock(8000000);
 }
 
