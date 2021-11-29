@@ -39,7 +39,7 @@
    - digit 3 ->    PA2
    - digit time -> PA7
    
-2. Vytvoriť sadu znakou (písmená a číslice). Pri abecede sa riadte podľa výššie uvedenej stránky. 
+2. Vytvoriť sadu znakov (písmená a číslice). Pri abecede sa riadte podľa výššie uvedenej stránky. 
 3. Implementujte aj znaky "K", "M", "V", "W", "X", "Z" .
 4. Vytvorte aplikáciu, ktorá na displeji zobrazí vaše meno, priezvysko a ID. Kedže sa všetky znaky na displaj nezmestia naraz v jednom čase, je potrebné, aby sa text posúval. Výsledná animácia bude vyzerať tak, že na začiatku sa zobrazia prvé štyri znaky krstného mena. Potom sa zobrazí 2. až 5. znak krstného mena a tak ďalej ... . Krstné meno, priezvysko a ID budú navzájom oddelené podčiarkovníkom - "_". Do vašej sady znakov teda zahrnte aj tento znak.
 5. Znak sa posunie každých 500ms.
