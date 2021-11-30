@@ -51,7 +51,7 @@ int main(void)
   resetDigits();
   resetSegments();
 
-  MX_TIM3_Init();
+  MX_TIM2_Init();
 
   while (1)
   {

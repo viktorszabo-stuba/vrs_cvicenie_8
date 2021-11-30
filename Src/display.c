@@ -23,7 +23,8 @@ void resetSegments(void)
 	LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_4);
 	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_0);
 	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_1);
-	LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_3);
+	//LL_GPIO_SetOutputPin(GPIOA, LL_GPIO_PIN_3);
+	LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_6);
 }
 
 /*Set (turn-on) all the segments of display*/
@@ -36,7 +37,8 @@ void setSegments(void)
 	LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_4);
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_0);
 	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_1);
-	LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_3);
+	//LL_GPIO_ResetOutputPin(GPIOA, LL_GPIO_PIN_3);
+	LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_6);
 }
 
 /* Reset (turn-off) all digits*/
@@ -337,13 +339,13 @@ void updateDisplay(void)
 }
 
 //Update displayed data and keep display ON
-void TIM3_IRQHandler(void)
+void TIM2_IRQHandler(void)
 {
-	if(LL_TIM_IsActiveFlag_UPDATE(TIM3))
+	if(LL_TIM_IsActiveFlag_UPDATE(TIM2))
 	{
 		updateDisplay();
 	}
 
-	LL_TIM_ClearFlag_UPDATE(TIM3);
+	LL_TIM_ClearFlag_UPDATE(TIM2);
 }
 
