@@ -28,7 +28,7 @@
    - segment C  -> PA8             
    - segment D  -> PB5             
    - segment E  -> PA11            
-   - segment F  -> PA3
+   - segment F  -> PB6
    - segment G  -> PB4
    - segment DP -> PB1
 
