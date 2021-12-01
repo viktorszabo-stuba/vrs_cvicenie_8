@@ -11,7 +11,9 @@
     <img src="https://github.com/VRS-Predmet/vrs_cvicenie_8/blob/zadanie_cv8/pics/20201124_111845.jpg" width="350">
 </p>
 
-- dokumentácia k displeju: https://www.tme.eu/Document/afe40de6cbe93d7d978749835d83cb6c/LFD028BUE-103A.pdf
+- dokumentácia k displeju: 
+    - https://www.tme.eu/Document/afe40de6cbe93d7d978749835d83cb6c/LFD028BUE-103A.pdf
+    - https://www.tme.eu/Document/dbdd01c960330b1fd5fd83f8ac44a1e1/LFD036BUE-101B.pdf
 
 - zobrazovanie znakov pomocou segmentov:
 
