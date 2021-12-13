@@ -27,9 +27,12 @@
 void SystemClock_Config(void);
 
 extern uint64_t disp_time;
+extern char text;
+extern uint8_t textsize;
 
 uint64_t saved_time;
-double num_to_display = 10;
+uint8_t ind = 0;
+uint8_t right = 1;
 
 int main(void)
 {
@@ -55,16 +58,27 @@ int main(void)
 
   while (1)
   {
-	  if(disp_time > (saved_time + 100))
-	  {
-		  displayNumber(num_to_display);
-	  	  num_to_display -= 0.10;
-	  	  saved_time = disp_time;
-
-	  	  if(num_to_display <= 0)
-	  	  {
-	  		  num_to_display = 100;
-	  	  }
+	  if (right){
+			  if(disp_time > (saved_time + 500))
+			  {
+				  displayShow(ind);
+				  saved_time = disp_time;
+				  ind++;
+				  if (ind==(textsize-3)){
+					  right=0;
+				  }
+		  }
+	  }
+	  if (!right){
+			  if(disp_time > (saved_time + 500))
+			  {
+				  displayShow(ind);
+				  saved_time = disp_time;
+				  ind--;
+				  if (ind==0){
+					  right=1;
+				  }
+		  }
 	  }
   }
 
